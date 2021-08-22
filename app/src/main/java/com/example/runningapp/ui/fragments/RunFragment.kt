@@ -32,7 +32,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     ): View {
         _binding = FragmentRunBinding.inflate(inflater,container,false)
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_setupFragment_to_runFragment)
+            findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
         }
 
         return binding.root

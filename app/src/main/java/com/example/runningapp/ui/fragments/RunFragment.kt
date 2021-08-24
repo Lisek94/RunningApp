@@ -31,10 +31,10 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRunBinding.inflate(inflater,container,false)
+        requestPermission()
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
         }
-
         return binding.root
     }
 
@@ -77,14 +77,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        super.registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permission ->
-            val granted = permission.entries.all {
-                it.value == true
-            }
-            if (granted) {
-                EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this)
-            }
-
-        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this)
     }
 }

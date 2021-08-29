@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.runningapp.R
-import com.example.runningapp.databinding.FragmentRunBinding
 import com.example.runningapp.databinding.FragmentTrackingBinding
+import com.example.runningapp.other.Constants
 import com.example.runningapp.services.TrackingService
 import com.example.runningapp.ui.viewmodels.MainViewModel
 import com.google.android.gms.maps.GoogleMap
@@ -31,6 +30,11 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         binding.mapView.getMapAsync {
             map = it
         }
+
+        binding.btnToggleRun.setOnClickListener {
+            sendCommandToService(Constants.ACTION_START_OR_RESUME_SERVICE)
+        }
+
         return binding.root
     }
 

@@ -4,8 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.runningapp.R
 import com.example.runningapp.databinding.ActivityMainBinding
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         binding.bottomNavigationView.setupWithNavController(navHostFragment.navController)
 
-        navHostFragment.findNavController()
+        findNavController(R.id.navHostFragment)
             .addOnDestinationChangedListener { _, destination, _ ->
                 when(destination.id) {
                     R.id.settingsFragment, R.id.runFragment, R.id.statisticsFragment ->
@@ -45,9 +45,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToTrackingFragmentIfNeeded(intent: Intent?) {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        //val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         if(intent?.action == ACTION_SHOW_TRACKING_FRAGMENT){
-            navHostFragment.findNavController().navigate(R.id.action_global_trackingFragment)
+            findNavController(R.id.navHostFragment).navigate(R.id.action_global_trackingFragment)
         }
     }
 }

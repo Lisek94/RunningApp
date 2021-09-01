@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.runningapp.R
 import com.example.runningapp.databinding.ActivityMainBinding
@@ -22,12 +23,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        val navHostFragment = findNavController(R.id.navHostFragment)
 
         navigateToTrackingFragmentIfNeeded(intent)
 
         setSupportActionBar(binding.toolbar)
-        binding.bottomNavigationView.setupWithNavController(navHostFragment.navController)
+        binding.bottomNavigationView.setupWithNavController(navHostFragment)
 
         findNavController(R.id.navHostFragment)
             .addOnDestinationChangedListener { _, destination, _ ->
@@ -45,7 +46,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToTrackingFragmentIfNeeded(intent: Intent?) {
-        //val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         if(intent?.action == ACTION_SHOW_TRACKING_FRAGMENT){
             findNavController(R.id.navHostFragment).navigate(R.id.action_global_trackingFragment)
         }

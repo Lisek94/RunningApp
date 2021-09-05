@@ -101,9 +101,11 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     private fun moveCameraToUser() {
         if(pathPoint.isNotEmpty() && pathPoint.last().isNotEmpty()) {
-            CameraUpdateFactory.newLatLngZoom(
+            map?.animateCamera(
+                CameraUpdateFactory.newLatLngZoom(
                 pathPoint.last().last(),
                 MAP_ZOOM
+                )
             )
         }
     }
@@ -119,7 +121,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     }
 
     private fun addLatestPolyline() {
-        if(pathPoint.isNotEmpty() && pathPoint.last().size > 0) {
+        if(pathPoint.isNotEmpty() && pathPoint.last().size > 1) {
             val preLastLatLng = pathPoint.last()[pathPoint.last().size - 2]
             val lastLatLng = pathPoint.last().last()
             val polylineOptions = PolylineOptions()
